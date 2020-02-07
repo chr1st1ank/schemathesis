@@ -1,3 +1,4 @@
+import os
 import pathlib
 import traceback
 from contextlib import contextmanager
@@ -193,7 +194,7 @@ def run(  # pylint: disable=too-many-arguments
 
     with abort_on_network_errors():
         options.update({"checks": selected_checks, "workers_num": workers_num})
-        if pathlib.Path(schema).is_file():
+        if os.path.isfile(schema):
             options["loader"] = from_path
         elif app is not None and not urlparse(schema).netloc:
             # If `schema` is not an existing filesystem path or an URL then it is considered as an endpoint with
